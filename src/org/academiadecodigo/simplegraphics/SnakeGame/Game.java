@@ -21,6 +21,8 @@ public class Game {
         grid.init();
         snake = new Snake(grid);
         snake.setSimplegfxGrid(grid);
+        snake.Snakekeyboard(snake);
+
     }
 
     public void start() throws InterruptedException {
@@ -29,7 +31,8 @@ public class Game {
 
             Thread.sleep(delay);
 
-            snake.move(snake.getDirection());
+            snake.move(snake.getDirection(),snake.getPicture());
+            snake.move(snake.getDirection(),snake.getTail());
         }
     }
 

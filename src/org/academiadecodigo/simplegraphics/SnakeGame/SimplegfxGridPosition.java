@@ -67,12 +67,11 @@ public class SimplegfxGridPosition implements GridPosition {
     }
 
 
-    public void moveDirection(GridDirection direction)
+    public void moveDirection(GridDirection direction, Picture picture)
     {
         int x = simpleGfxGrid.columnToX(getCol());
         int y = simpleGfxGrid.rowToY(getRow());
-        System.out.println(getCol());
-        System.out.println(getRow());
+
         switch (direction) {
                 case UP:
                     moveUp();
@@ -90,9 +89,7 @@ public class SimplegfxGridPosition implements GridPosition {
 
         int x2 = simpleGfxGrid.columnToX(getCol());
         int y2 = simpleGfxGrid.rowToY(getRow());
-        System.out.println(getCol());
-        System.out.println(getRow());
-        rectangle.translate(x2 - x, y2 - y);
+        picture.translate(x2 - x, y2 - y);
     }
 
     public int getCellsize() {
