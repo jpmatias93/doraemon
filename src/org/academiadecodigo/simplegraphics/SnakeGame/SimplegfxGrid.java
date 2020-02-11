@@ -10,8 +10,8 @@ public class SimplegfxGrid implements Grid {
     private int cols;
     private int rows;
     public static final int PADDING = 10;
-    public static final int cellsize = 20;
-    private Rectangle grid;
+    public static final int cellsize = 15;
+    private Rectangle field;
 
 
     public SimplegfxGrid(int cols, int rows) {
@@ -21,25 +21,25 @@ public class SimplegfxGrid implements Grid {
 
 
     public void init() {
-        grid = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
-        grid.draw();
+        field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
+        field.draw();
     }
 
     public int getWidth(){
-        return grid.getWidth();
+        return cols * cellsize;
     }
 
 
     public int getHeigth(){
-        return grid.getHeight();
+        return rows * cellsize;
     }
 
     public int getX(){
-        return grid.getX();
+        return field.getX();
     }
 
     public int getY() {
-        return grid.getY();
+        return field.getY();
     }
 
     public int rowToY(int row) {

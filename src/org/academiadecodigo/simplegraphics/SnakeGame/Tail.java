@@ -1,5 +1,6 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Tail {
@@ -34,7 +35,7 @@ public class Tail {
 
     
 
-    public void tailMove(GridDirection direction, GridPosition position, Picture picture) {
+    public void tailMove(GridDirection direction, GridPosition position, Rectangle picture) {
 
         this.position.moveDirection(direction, picture);
 

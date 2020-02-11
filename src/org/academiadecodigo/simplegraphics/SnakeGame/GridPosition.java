@@ -1,6 +1,9 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import java.util.Objects;
 
 public interface GridPosition {
 
@@ -15,7 +18,7 @@ public interface GridPosition {
     public void setPos(int col, int row);
 
 
-    public void moveDirection(GridDirection direction, Picture picture);
+    public void moveDirection(GridDirection direction, Rectangle picture);
 
     public void show();
 

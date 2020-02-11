@@ -14,20 +14,17 @@ public class SimplegfxGridPosition implements GridPosition {
     private Picture doraemon;
 
     public SimplegfxGridPosition(SimplegfxGrid grid) {
+        this.simpleGfxGrid = grid;
         this.col = (int) (Math.random() * grid.getCols());
         this.row = (int) (Math.random() * grid.getRows());
-        this.simpleGfxGrid = grid;
-        rectangle = new Rectangle(simpleGfxGrid.columnToX(getCol()), simpleGfxGrid.rowToY(getRow()), simpleGfxGrid.getCellsize(), simpleGfxGrid.getCellsize());
-        show();
+
     }
 
     public SimplegfxGridPosition(int col, int row, SimplegfxGrid grid) {
+        this.simpleGfxGrid = grid;
         this.col = col;
         this.row = row;
-        this.simpleGfxGrid = grid;
-        rectangle = new Rectangle(simpleGfxGrid.columnToX(col), simpleGfxGrid.rowToY(row), simpleGfxGrid.getCellsize(), simpleGfxGrid.getCellsize());
-        show();
-        rectangle.setColor(Color.BLACK);
+
     }
 
 
@@ -67,7 +64,7 @@ public class SimplegfxGridPosition implements GridPosition {
     }
 
 
-    public void moveDirection(GridDirection direction, Picture picture)
+    public void moveDirection(GridDirection direction, Rectangle picture)
     {
         int x = simpleGfxGrid.columnToX(getCol());
         int y = simpleGfxGrid.rowToY(getRow());

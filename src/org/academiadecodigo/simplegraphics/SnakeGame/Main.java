@@ -15,7 +15,7 @@ public class Main {
 
 
 
-       Game game = new Game(400,400,200);
+       Game game = new Game(30,30,200);
 
        game.init();
        game.start();

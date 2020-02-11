@@ -6,6 +6,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
+import java.util.Objects;
 
 
 public class Snake implements KeyboardHandler {
@@ -58,8 +59,8 @@ public class Snake implements KeyboardHandler {
     public GridDirection getDirection() {
         return direction;
     }
-
-    public void snakeMove(GridDirection direction, Picture picture) {
+/*
+    public void snakeMove(GridDirection direction, Objects picture) {
         lastPosition = position;
         System.out.println("2" + lastDirection);
         position.moveDirection(direction, picture);
@@ -69,7 +70,7 @@ public class Snake implements KeyboardHandler {
     public Picture getSnakePicture() {
             return snake;
     }
-
+*/
     public void setDirection(GridDirection direction) {
         this.direction = direction;
     }
