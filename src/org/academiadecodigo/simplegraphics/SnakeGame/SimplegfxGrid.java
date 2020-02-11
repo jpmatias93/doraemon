@@ -25,6 +25,10 @@ public class SimplegfxGrid implements Grid {
         field.draw();
     }
 
+    public int getPadding() {
+        return PADDING;
+    }
+
     public int getWidth(){
         return cols * cellsize;
     }

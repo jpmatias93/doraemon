@@ -21,11 +21,12 @@ public class Doraemon implements KeyboardHandler {
 
     public Doraemon(GridPosition pos, SimplegfxGrid grid) {
         this.grid = grid;
-        this.doraemon = new Rectangle(40,40,grid.getCellsize(),grid.getCellsize());
+        this.doraemon = new Rectangle(100,100,grid.getCellsize(),grid.getCellsize());
         //this.doraemon = new Picture(50,50, "BwPMAyDK_400x400.jpg");
         this.pos = pos;
         keyboard = new Keyboard(this);
         this.doraemon.draw();
+        this.doraemon.fill();
        // this.doraemon.grow(-150,-150);
         ;
         this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
@@ -40,19 +41,19 @@ public class Doraemon implements KeyboardHandler {
      */
     public void init() {
         KeyboardEvent left = new KeyboardEvent();
-        left.setKey(KeyboardEvent.KEY_LEFT);
+        left.setKey(KeyboardEvent.KEY_A);
         left.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent right = new KeyboardEvent();
-        right.setKey(KeyboardEvent.KEY_RIGHT);
+        right.setKey(KeyboardEvent.KEY_D);
         right.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent up = new KeyboardEvent();
-        up.setKey(KeyboardEvent.KEY_UP);
+        up.setKey(KeyboardEvent.KEY_W);
         up.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent down = new KeyboardEvent();
-        down.setKey(KeyboardEvent.KEY_DOWN);
+        down.setKey(KeyboardEvent.KEY_S);
         down.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
 
         KeyboardEvent faster = new KeyboardEvent();
@@ -75,23 +76,25 @@ public class Doraemon implements KeyboardHandler {
 
         switch (currentDirection) {
             case LEFT:
-                if (doraemon.getX() ==0) {
+                if (doraemon.getX() == grid.getPadding()) {
+                    System.out.println(doraemon.getX());
                     return true;
+
                 }
             case RIGHT:
-                if ( doraemon.getX()== grid.getWidth() ){ //martelado
-                    System.out.println("jdjdjdhdj");
+                if ( (doraemon.getX() + grid.getCellsize())== (grid.getPadding() + grid.getWidth()) ){
+                    System.out.println(doraemon.getX());
 
                     return true;
                 }
             case UP:
-                if (doraemon.getY() == 0) {
-
-                    System.out.println(grid.getWidth());
+                if (doraemon.getY() == grid.getPadding()) {
+                    System.out.println(doraemon.getY());
                     return true;
                 }
             case DOWN:
-                if (doraemon.getY() == grid.getHeigth() ){
+                if (doraemon.getY() + grid.getCellsize() == grid.getPadding() + grid.getHeigth() ){
+                    System.out.println(doraemon.getY());
                     return true;
                 }
         }
@@ -146,16 +149,16 @@ public class Doraemon implements KeyboardHandler {
         }
 
         switch (keyboardEvent.getKey()) {
-            case KeyboardEvent.KEY_LEFT:
+            case KeyboardEvent.KEY_A:
                 currentDirection = GridDirection.LEFT;
                 break;
-            case KeyboardEvent.KEY_RIGHT:
+            case KeyboardEvent.KEY_D:
                 currentDirection = GridDirection.RIGHT;
                 break;
-            case KeyboardEvent.KEY_UP:
+            case KeyboardEvent.KEY_W:
                 currentDirection = GridDirection.UP;
                 break;
-            case KeyboardEvent.KEY_DOWN:
+            case KeyboardEvent.KEY_S:
                 currentDirection = GridDirection.DOWN;
                 break;
         }
