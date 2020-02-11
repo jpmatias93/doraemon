@@ -15,26 +15,37 @@ public class Snake implements KeyboardHandler {
     private GridPosition position;
     private GridDirection direction;
     private Keyboard snakeKeyboard;
-
-
     private GridPosition lastPosition;
     private GridDirection lastDirection;
-
-
     private Picture snake;
-    private Picture tail;
+
+
+
+
+
+
+
+
+    public Snake(){
+
+    }
 
     public Snake(SimplegfxGrid grid) {
+
         snake = new Picture(200, 200, "doraemon.jpg");
-        tail = new Picture(snake.getX() - grid.getCellsize() * 5, snake.getY(), "doraemon.jpg");
-        tail.grow(-150, -200);
-        tail.draw();
         snake.grow(-150, -200);
         snake.draw();
         direction = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
-        System.out.println(getDirection());
+        lastDirection = direction;
+        System.out.println("0" + lastDirection);
+        System.out.println("1" + direction);
         position = grid.makeGridPosition(100, 100);
+        lastPosition = position;
     }
+
+    public GridDirection getLastDirection() {
+
+        return lastDirection;}
 
     public void setSimplegfxGrid(Grid grid) {
         this.grid = grid;
@@ -48,23 +59,20 @@ public class Snake implements KeyboardHandler {
         return direction;
     }
 
-
-    public void move(GridDirection direction, Picture picture) {
-
+    public void snakeMove(GridDirection direction, Picture picture) {
+        lastPosition = position;
+        System.out.println("2" + lastDirection);
         position.moveDirection(direction, picture);
 
     }
 
-    public Picture getPicture() {
-        return snake;
+    public Picture getSnakePicture() {
+            return snake;
     }
-    public Picture getTail() {return tail;}
-
 
     public void setDirection(GridDirection direction) {
         this.direction = direction;
     }
-
 
     public void Snakekeyboard(Snake snake) {
         snakeKeyboard = new Keyboard(snake);
@@ -94,6 +102,9 @@ public class Snake implements KeyboardHandler {
 
     @Override
     public void keyPressed(KeyboardEvent e){
+            lastDirection = direction;
+            lastPosition = position;
+        System.out.println("3" + lastDirection);
         switch (e.getKey()) {
             case KeyboardEvent.KEY_W:
                 setDirection(GridDirection.UP);
@@ -110,25 +121,13 @@ public class Snake implements KeyboardHandler {
         }
     };
 
+    public GridPosition getLastPosition() {return lastPosition;}
+
     @Override
     public void keyReleased(KeyboardEvent e) {
 
     }
 
 
-    public class Tail {
-
-        private Picture tail;
-
-        public Tail(SimplegfxGrid grid) {
-            tail = new Picture(snake.getX() - grid.getCellsize() * 5, snake.getY(), "doraemon.jpg");
-            tail.grow(-150, -200);
-            tail.draw();
-        }
-
-
-
-
-    }
 
 }

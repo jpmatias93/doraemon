@@ -8,8 +8,8 @@ public interface Movable {
     /**
      * Moves by a given amount.
      *
-     * @param dx the amount by which to move in x-direction
-     * @param dy the amount by which to move in y-direction
+     * @param dx the amount by which to snakeMove in x-direction
+     * @param dy the amount by which to snakeMove in y-direction
      */
     public void translate(double dx, double dy);
 

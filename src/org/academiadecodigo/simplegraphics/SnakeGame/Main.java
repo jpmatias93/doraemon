@@ -26,7 +26,7 @@ public class Main {
 
         while(true) {
             System.out.println(((Snake) sprite).getDirection());
-            ((Snake) sprite).move(((Snake) sprite).getDirection());
+            ((Snake) sprite).snakeMove(((Snake) sprite).getDirection());
         }
 
         */
