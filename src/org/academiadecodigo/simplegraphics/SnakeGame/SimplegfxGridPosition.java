@@ -13,12 +13,12 @@ public class SimplegfxGridPosition implements GridPosition {
     private Rectangle rectangle;
     private Picture doraemon;
 
-    public SimplegfxGridPosition(SimplegfxGrid grid) {
+    /*public SimplegfxGridPosition(SimplegfxGrid grid) {
         this.simpleGfxGrid = grid;
         this.col = (int) (Math.random() * grid.getCols());
         this.row = (int) (Math.random() * grid.getRows());
 
-    }
+    }*/
 
     public SimplegfxGridPosition(int col, int row, SimplegfxGrid grid) {
         this.simpleGfxGrid = grid;

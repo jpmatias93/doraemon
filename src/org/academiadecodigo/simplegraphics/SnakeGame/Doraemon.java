@@ -82,7 +82,7 @@ public class Doraemon implements KeyboardHandler {
 
                 }
             case RIGHT:
-                if ( (doraemon.getX() + grid.getCellsize())== (grid.getPadding() + grid.getWidth()) ){
+                if (doraemon.getX() + grid.getCellsize() == grid.getPadding() + grid.getWidth()){
                     System.out.println(doraemon.getX());
 
                     return true;

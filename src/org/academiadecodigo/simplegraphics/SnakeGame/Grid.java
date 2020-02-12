@@ -10,7 +10,7 @@ public interface Grid {
     public int getRows();
 
 
-    public GridPosition makeGridPosition();
+   // public GridPosition makeGridPosition();
 
 
     public GridPosition makeGridPosition(int col, int row);
