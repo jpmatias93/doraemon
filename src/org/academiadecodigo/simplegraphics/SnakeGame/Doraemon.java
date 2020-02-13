@@ -82,24 +82,28 @@ public class Doraemon implements KeyboardHandler {
 
         switch (currentDirection) {
             case LEFT:
-                if (doraemon.getX() == grid.getPadding()) {
+                if (doraemon.getX() + grid.getCellsize() == grid.getPadding()) {
                     //System.out.println(doraemon.getX());
+                    doraemon.translate(grid.getCellsize(), 0);
                     return true;
 
                 }
             case RIGHT:
-                if (doraemon.getX() + grid.getCellsize() == grid.getPadding() + grid.getWidth()){
+                if (doraemon.getX() == grid.getPadding() + grid.getWidth()){
                     //System.out.println(doraemon.getX());
+                    doraemon.translate(- grid.getCellsize(), 0);
                     return true;
                 }
             case UP:
-                if (doraemon.getY() == grid.getPadding()) {
+                if (doraemon.getY() + grid.getCellsize() == grid.getPadding()) {
                     //System.out.println(doraemon.getY());
+                    doraemon.translate(0, grid.getCellsize());
                     return true;
                 }
             case DOWN:
-                if (doraemon.getY() + grid.getCellsize() == grid.getPadding() + grid.getHeigth() ){
+                if (doraemon.getY() == grid.getPadding() + grid.getHeigth() ){
                     //System.out.println(doraemon.getY());
+                    doraemon.translate(0, -grid.getCellsize());
                     return true;
                 }
         }
