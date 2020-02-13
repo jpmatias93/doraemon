@@ -18,7 +18,7 @@ public interface GridPosition {
     public void setPos(int col, int row);
 
 
-    public void moveDirection(GridDirection direction, Rectangle picture);
+    public void moveDirection(GridDirection direction, Picture picture);
 
     public void show();
 

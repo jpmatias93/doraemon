@@ -13,7 +13,7 @@ public class Tail {
     private SimplegfxGrid simplegfxGrid;
 
 
-
+/*
     public Tail(SimplegfxGrid grid, Snake snake) {
         this.snake = snake;
         tail = new Picture(100,200, "doraemon.jpg");
@@ -52,7 +52,7 @@ public class Tail {
         this.grid = grid;
     }
 
-
+*/
 
 
 }

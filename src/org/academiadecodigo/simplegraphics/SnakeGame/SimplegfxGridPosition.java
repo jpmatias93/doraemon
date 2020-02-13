@@ -64,7 +64,7 @@ public class SimplegfxGridPosition implements GridPosition {
     }
 
 
-    public void moveDirection(GridDirection direction, Rectangle picture)
+    public void moveDirection(GridDirection direction, Picture picture)
     {
         int x = simpleGfxGrid.columnToX(getCol());
         int y = simpleGfxGrid.rowToY(getRow());
