@@ -21,7 +21,9 @@ public class Doraemon implements KeyboardHandler {
 
     public Doraemon(GridPosition pos, SimplegfxGrid grid) {
         this.grid = grid;
-        this.doraemon = new Rectangle(100,100,grid.getCellsize(),grid.getCellsize());
+        this.doraemon = new Rectangle(grid.columnToX(15), grid.rowToY(15),grid.getCellsize(),grid.getCellsize());
+        System.out.println(doraemon.getX());
+        System.out.println(doraemon.getY());
         //this.doraemon = new Picture(50,50, "BwPMAyDK_400x400.jpg");
         this.pos = pos;
         keyboard = new Keyboard(this);

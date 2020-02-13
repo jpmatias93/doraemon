@@ -26,6 +26,11 @@ public class Game {
         */
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+
+        System.out.println(doraemon.getPos().getRow());
+        System.out.println(doraemon.getPos().getCol());
+        System.out.println(food.getPos().getCol());
+        System.out.println(food.getPos().getCol());
     }
 
     public void start() throws InterruptedException {
@@ -41,7 +46,13 @@ public class Game {
                 food.setDead();
                 food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
                 score = score + 5;
+            }
 
+            if (score > 10) {
+                delay = 100;
+            }
+            if (score > 20) {
+                delay = 50;
             }
 
             if (doraemon.isDead()) {
