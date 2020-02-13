@@ -25,9 +25,9 @@ public class SimplegfxGrid implements Grid {
         field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
         field.draw();
         picture = new Picture(PADDING, PADDING, "snakefield.jpg");
-        System.out.println(picture.getWidth());
-        System.out.println(picture.getHeight());
-        System.out.println(picture.pixels());
+        //System.out.println(picture.getWidth());
+        //System.out.println(picture.getHeight());
+        //System.out.println(picture.pixels());
         picture.draw();
     }
 

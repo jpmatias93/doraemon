@@ -21,11 +21,19 @@ public class Food {
         this.ellipse.fill();*/
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
-        System.out.println("X " + randomX);
-        System.out.println("Y " + randomY);
+        // System.out.println("X " + randomX);
+        // System.out.println("Y " + randomY);
         this.rectangle = new Rectangle(randomX, randomY, grid.getCellsize(), grid.getCellsize());
         rectangle.setColor(Color.MAGENTA);
         rectangle.fill();
+    }
+
+    public int getX() {
+        return rectangle.getX();
+    }
+
+    public int getY() {
+        return rectangle.getY();
     }
 
     public GridPosition getPos() {

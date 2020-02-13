@@ -8,6 +8,7 @@ public class Game {
     private Tail tail;
     private Doraemon doraemon;
     private Food food;
+    private int score;
 
 
     public Game(int col, int row, int delay) {
@@ -35,11 +36,19 @@ public class Game {
 
             doraemon.move();
 
-            System.out.println("foodRow" + food.getPos().getRow());
-            System.out.println("foodCol" + food.getPos().getCol());
-            System.out.println("snakeRow" + doraemon.getPos().getRow());
-            System.out.println("snakeCol" + doraemon.getPos().getCol());
+            if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
+                System.out.println("fodeu");
+                food.setDead();
+                food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+                score = score + 5;
 
+            }
+
+            if (doraemon.isDead()) {
+                System.out.println("GAME OVER");
+                System.out.println("Score: " + score);
+                break;
+            }
 
             /*if (doraemon.getPos().getRow() == food.getPos().getCol() && doraemon.getPos().getCol() == food.getPos().getCol()) {
                 System.out.println("comeu");

@@ -28,12 +28,18 @@ public class Doraemon implements KeyboardHandler {
         this.doraemon.draw();
         this.doraemon.fill();
        // this.doraemon.grow(-150,-150);
-        ;
         this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
 
         init();
     }
 
+    public int getX() {
+        return doraemon.getX();
+    }
+
+    public int getY() {
+        return doraemon.getY();
+    }
 
 
     /**
@@ -77,24 +83,23 @@ public class Doraemon implements KeyboardHandler {
         switch (currentDirection) {
             case LEFT:
                 if (doraemon.getX() == grid.getPadding()) {
-                    System.out.println(doraemon.getX());
+                    //System.out.println(doraemon.getX());
                     return true;
 
                 }
             case RIGHT:
                 if (doraemon.getX() + grid.getCellsize() == grid.getPadding() + grid.getWidth()){
-                    System.out.println(doraemon.getX());
-
+                    //System.out.println(doraemon.getX());
                     return true;
                 }
             case UP:
                 if (doraemon.getY() == grid.getPadding()) {
-                    System.out.println(doraemon.getY());
+                    //System.out.println(doraemon.getY());
                     return true;
                 }
             case DOWN:
                 if (doraemon.getY() + grid.getCellsize() == grid.getPadding() + grid.getHeigth() ){
-                    System.out.println(doraemon.getY());
+                    //System.out.println(doraemon.getY());
                     return true;
                 }
         }
