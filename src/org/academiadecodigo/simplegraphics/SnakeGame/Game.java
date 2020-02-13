@@ -42,7 +42,6 @@ public class Game {
             doraemon.move();
 
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
-                //System.out.println("fodeu");
                 food.setDead();
                 food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
                 score = score + 5;
@@ -53,6 +52,9 @@ public class Game {
             }
             if (score > 20) {
                 delay = 50;
+            }
+            if (score > 50) {
+                delay = 25;
             }
 
             if (doraemon.isDead()) {

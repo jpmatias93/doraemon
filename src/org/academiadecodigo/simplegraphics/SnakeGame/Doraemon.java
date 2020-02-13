@@ -29,7 +29,7 @@ public class Doraemon implements KeyboardHandler {
         keyboard = new Keyboard(this);
         this.doraemon.draw();
         //this.doraemon.fill();
-       // this.doraemon.grow(-150,-150);
+        //this.doraemon.grow(-150,-150);
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
         this.currentDirection = GridDirection.RIGHT;
 
@@ -87,7 +87,6 @@ public class Doraemon implements KeyboardHandler {
         switch (currentDirection) {
             case LEFT:
                 if (doraemon.getX() + grid.getCellsize() == grid.getPadding()) {
-                    //System.out.println(doraemon.getX());
                     doraemon.translate(grid.getCellsize(), 0);
                     return true;
 
@@ -100,13 +99,11 @@ public class Doraemon implements KeyboardHandler {
                 }
             case UP:
                 if (doraemon.getY() + grid.getCellsize() == grid.getPadding()) {
-                    //System.out.println(doraemon.getY());
                     doraemon.translate(0, grid.getCellsize());
                     return true;
                 }
             case DOWN:
                 if (doraemon.getY() == grid.getPadding() + grid.getHeigth() ){
-                    //System.out.println(doraemon.getY());
                     doraemon.translate(0, -grid.getCellsize());
                     return true;
                 }
@@ -149,6 +146,8 @@ public class Doraemon implements KeyboardHandler {
 
 
 
+
+
     /**
      * Handles key press events
      *
@@ -167,18 +166,30 @@ public class Doraemon implements KeyboardHandler {
 
         switch (keyboardEvent.getKey()) {
             case KeyboardEvent.KEY_A:
+                if (currentDirection == GridDirection.RIGHT) {
+                    break;
+                }
                 currentDirection = GridDirection.LEFT;
                 doraemon.load("snakeHeadLeft.jpg");
                 break;
             case KeyboardEvent.KEY_D:
+                if (currentDirection == GridDirection.LEFT) {
+                    break;
+                }
                 currentDirection = GridDirection.RIGHT;
                 doraemon.load("snakeHeadRight.jpg");
                 break;
             case KeyboardEvent.KEY_W:
+                if (currentDirection == GridDirection.DOWN) {
+                    break;
+                }
                 currentDirection = GridDirection.UP;
                 doraemon.load("snakeHeadUp.jpg");
                 break;
             case KeyboardEvent.KEY_S:
+                if (currentDirection == GridDirection.UP) {
+                    break;
+                }
                 currentDirection = GridDirection.DOWN;
                 doraemon.load("snakeHeadDown.png");
                 break;
