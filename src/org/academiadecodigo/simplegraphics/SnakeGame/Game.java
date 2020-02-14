@@ -8,6 +8,7 @@ public class Game {
     private Tail tail;
     private Doraemon doraemon;
     private Food food;
+    private Gigante gigante;
     private int score;
 
 
@@ -26,11 +27,7 @@ public class Game {
         */
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
-
-        System.out.println(doraemon.getPos().getRow());
-        System.out.println(doraemon.getPos().getCol());
-        System.out.println(food.getPos().getCol());
-        System.out.println(food.getPos().getCol());
+        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
     }
 
     public void start() throws InterruptedException {
@@ -40,6 +37,7 @@ public class Game {
             Thread.sleep(delay);
 
             doraemon.move();
+            gigante.move();
 
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
                 food.setDead();
@@ -61,6 +59,12 @@ public class Game {
                 System.out.println("GAME OVER");
                 System.out.println("Score: " + score);
                 break;
+            }
+
+            if (doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) {
+                doraemon.setDead();
+
+                System.out.println("GAME OVER");
             }
 
             /*if (doraemon.getPos().getRow() == food.getPos().getCol() && doraemon.getPos().getCol() == food.getPos().getCol()) {
