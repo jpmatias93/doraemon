@@ -10,7 +10,7 @@ public class SimplegfxGrid implements Grid {
     private int cols;
     private int rows;
     public static final int PADDING = 10;
-    public static final int cellsize = 15;
+    public static final int cellsize = 20;
     private Rectangle field;
     private Picture picture;
 
@@ -24,7 +24,7 @@ public class SimplegfxGrid implements Grid {
     public void init() {
         field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
         field.draw();
-        picture = new Picture(PADDING, PADDING, "snakefield.jpg");
+        picture = new Picture(PADDING, PADDING, "snakeField2.jpg");
         //System.out.println(picture.getWidth());
         //System.out.println(picture.getHeight());
         //System.out.println(picture.pixels());

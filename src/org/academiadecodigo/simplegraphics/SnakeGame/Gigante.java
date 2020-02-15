@@ -14,7 +14,7 @@ public class Gigante {
 
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
-        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "snakeApple.jpg");
+        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "snakeApple2.jpg");
         this.pos = pos;
         picture.draw();
 
