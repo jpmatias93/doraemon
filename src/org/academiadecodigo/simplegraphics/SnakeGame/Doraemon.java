@@ -23,7 +23,7 @@ public class Doraemon implements KeyboardHandler {
     public Doraemon(GridPosition pos, SimplegfxGrid grid) {
         this.grid = grid;
         //this.doraemon = new Rectangle(grid.columnToX(15), grid.rowToY(15),grid.getCellsize(),grid.getCellsize());
-        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "snakeHeadRight2.jpg");
+        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "doraemonRight.png");
         //this.doraemon = new Picture(50,50, "BwPMAyDK_400x400.jpg");
         this.pos = pos;
         keyboard = new Keyboard(this);
@@ -170,28 +170,28 @@ public class Doraemon implements KeyboardHandler {
                     break;
                 }
                 currentDirection = GridDirection.LEFT;
-                doraemon.load("snakeHeadLeft2.jpg");
+                doraemon.load("doraemonLeft.png");
                 break;
             case KeyboardEvent.KEY_D:
                 if (currentDirection == GridDirection.LEFT) {
                     break;
                 }
                 currentDirection = GridDirection.RIGHT;
-                doraemon.load("snakeHeadRight2.jpg");
+                doraemon.load("doraemonRight.png");
                 break;
             case KeyboardEvent.KEY_W:
                 if (currentDirection == GridDirection.DOWN) {
                     break;
                 }
                 currentDirection = GridDirection.UP;
-                doraemon.load("snakeHeadUp2.jpg");
+                doraemon.load("doraemonUp2.png");
                 break;
             case KeyboardEvent.KEY_S:
                 if (currentDirection == GridDirection.UP) {
                     break;
                 }
                 currentDirection = GridDirection.DOWN;
-                doraemon.load("snakeHeadDown2.jpg");
+                doraemon.load("doraemonDown.png");
                 break;
         }
 

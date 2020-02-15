@@ -4,6 +4,7 @@ import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Game implements KeyboardHandler {
 
@@ -16,6 +17,7 @@ public class Game implements KeyboardHandler {
     private Gigante gigante;
     private int score;
     private Keyboard keyboard;
+    private Picture pic;
 
 
     public Game(int col, int row, int delay) {
@@ -32,6 +34,8 @@ public class Game implements KeyboardHandler {
 
         keyboard.addEventListener(space);
 
+        //this.pic = new Picture(0, 0, "intro.png");
+        //pic.draw();
         grid.init();
 
         /*snake = new Snake(grid);
@@ -71,6 +75,7 @@ public class Game implements KeyboardHandler {
             doraemon.move();
             gigante.move();
 
+            System.out.println(doraemon.getX());
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
                 food.setDead();
                 food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);

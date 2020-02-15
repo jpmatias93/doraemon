@@ -28,7 +28,7 @@ public class Food {
         //this.rectangle = new Rectangle(randomX, randomY, grid.getCellsize(), grid.getCellsize());
         //rectangle.setColor(Color.MAGENTA);
         //rectangle.fill();
-        this.picture = new Picture(randomX,randomY, "snakeApple2.jpg");
+        this.picture = new Picture(randomX,randomY, "doraiaki.png");
         picture.draw();
     }
 
