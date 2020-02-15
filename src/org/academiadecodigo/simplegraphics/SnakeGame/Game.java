@@ -1,6 +1,11 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
-public class Game {
+import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
+import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
+
+public class Game implements KeyboardHandler {
 
     private SimplegfxGrid grid;
     private Snake snake;
@@ -10,15 +15,25 @@ public class Game {
     private Food food;
     private Gigante gigante;
     private int score;
+    private Keyboard keyboard;
 
 
     public Game(int col, int row, int delay) {
         grid = new SimplegfxGrid(col, row);
         this.delay = delay;
+        this.keyboard = new Keyboard(this);
     }
 
     public void init() {
+
+        KeyboardEvent space = new KeyboardEvent();
+        space.setKey(KeyboardEvent.KEY_SPACE);
+        space.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+
+        keyboard.addEventListener(space);
+
         grid.init();
+
         /*snake = new Snake(grid);
         snake.setSimplegfxGrid(grid);
         snake.Snakekeyboard(snake);
@@ -30,12 +45,29 @@ public class Game {
         gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
     }
 
+    @Override
+    public void keyPressed(KeyboardEvent e) {
+        if (e.getKey() == KeyboardEvent.KEY_SPACE) {
+            try {
+                start();
+            } catch (InterruptedException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyboardEvent e) {
+    }
+
     public void start() throws InterruptedException {
+        //grid.init();
+        //doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+        //food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+        //gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
 
         while (true) {
-
             Thread.sleep(delay);
-
             doraemon.move();
             gigante.move();
 
