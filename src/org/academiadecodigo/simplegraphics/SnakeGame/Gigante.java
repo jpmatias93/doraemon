@@ -8,6 +8,9 @@ public class Gigante {
     private SimplegfxGrid grid;
     private Picture picture;
     private GridDirection currentDirection;
+    private int directionChangeLevel = 8;
+
+
 
     public Gigante(GridPosition pos, SimplegfxGrid grid) {
         this.grid = grid;
@@ -20,7 +23,6 @@ public class Gigante {
 
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
         this.currentDirection = GridDirection.RIGHT;
-
     }
 
     public int getX() {
@@ -37,26 +39,26 @@ public class Gigante {
             case LEFT:
                 if (picture.getX() == grid.getPadding()) {
                     System.out.println(picture.getX());
-                    picture.translate(grid.getCellsize(), 0);
+                    //picture.translate(grid.getCellsize(), 0);
                     return true;
 
                 }
             case RIGHT:
-                if (picture.getX() + grid.getCellsize() == grid.getPadding() + grid.getWidth()){
+                if (picture.getX() + grid.getCellsize() == grid.getPadding() + grid.getWidth()) {
                     System.out.println(picture.getX());
-                    picture.translate(-grid.getCellsize(), 0);
+                    //picture.translate(-grid.getCellsize(), 0);
                     return true;
                 }
             case UP:
                 if (picture.getY() == grid.getPadding()) {
                     System.out.println(picture.getY());
-                    picture.translate(0, grid.getCellsize());
+                    //picture.translate(0, grid.getCellsize());
                     return true;
                 }
             case DOWN:
-                if (picture.getY() + grid.getCellsize() == grid.getPadding() + grid.getHeigth() ){
+                if (picture.getY() + grid.getCellsize() == grid.getPadding() + grid.getHeigth()) {
                     System.out.println(picture.getY());
-                    picture.translate(0, -grid.getCellsize());
+                    //picture.translate(0, -grid.getCellsize());
                     return true;
                 }
         }
@@ -93,9 +95,25 @@ public class Gigante {
     }
 */
 
+    public GridDirection chooseDirection() {
+
+        GridDirection newDirection = currentDirection;
+
+        if (Math.random() > ((double) directionChangeLevel / 10)) {
+            newDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
+
+            if (newDirection.isOpposite(currentDirection)) {
+                return chooseDirection();
+            }
+
+        }
+
+
+        return newDirection;
+    }
 
     public void move() {
-        accelerate(currentDirection);
+        accelerate(chooseDirection());
     }
 
 
@@ -108,13 +126,17 @@ public class Gigante {
         GridDirection newDirection = direction;
 
         if (isHittingWall()) {
-            newDirection = oppositeDirection();
+            newDirection = direction.oppositeDirection();
         }
 
         this.currentDirection = newDirection;
 
-        getPos().moveDirection(direction, picture);
+        getPos().moveDirection(newDirection, picture);
 
+    }
+
+    /*public boolean isOpposite(GridDirection direction) {
+        return direction.equals(oppositeDirection());
     }
 
     public GridDirection oppositeDirection() {
@@ -137,9 +159,7 @@ public class Gigante {
         }
 
         return opposite;
-    }
-
-
+    }*/
 
 
 }

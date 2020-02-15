@@ -1,6 +1,7 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
@@ -10,7 +11,7 @@ public class SimplegfxGrid implements Grid {
     private int cols;
     private int rows;
     public static final int PADDING = 10;
-    public static final int cellsize = 20;
+    public static final int cellsize = 30;
     private Rectangle field;
     private Picture picture;
 
@@ -22,8 +23,9 @@ public class SimplegfxGrid implements Grid {
 
 
     public void init() {
-        field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
-        field.draw();
+        field = new Rectangle(0, 0, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
+        field.setColor(Color.WHITE);
+        field.fill();
         picture = new Picture(PADDING, PADDING, "snakeField2.jpg");
         //System.out.println(picture.getWidth());
         //System.out.println(picture.getHeight());

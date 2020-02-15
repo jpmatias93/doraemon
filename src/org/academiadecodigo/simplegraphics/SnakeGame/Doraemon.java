@@ -103,7 +103,7 @@ public class Doraemon implements KeyboardHandler {
                     return true;
                 }
             case DOWN:
-                if (doraemon.getY() == grid.getPadding() + grid.getHeigth() ){
+                if (doraemon.getY() == grid.getPadding() + grid.getHeigth()){
                     doraemon.translate(0, -grid.getCellsize());
                     return true;
                 }
