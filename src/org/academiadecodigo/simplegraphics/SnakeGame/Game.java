@@ -6,6 +6,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import javax.sound.sampled.*;
+import java.io.File;
+
 public class Game implements KeyboardHandler {
 
     private SimplegfxGrid grid;
@@ -18,6 +21,7 @@ public class Game implements KeyboardHandler {
     private int score;
     private Keyboard keyboard;
     private Picture pic;
+    private File audioFile;
 
 
     public Game(int col, int row, int delay) {
@@ -25,6 +29,10 @@ public class Game implements KeyboardHandler {
         this.delay = delay;
         this.keyboard = new Keyboard(this);
     }
+
+    public int mvUp =0, mvDown = 0, mvLeft = 0, mvRight = 0;
+    Clip audioClipGame;
+
 
     public void init() {
 
@@ -37,6 +45,26 @@ public class Game implements KeyboardHandler {
         //this.pic = new Picture(0, 0, "intro.png");
         //pic.draw();
         grid.init();
+
+        audioFile = new File("/Users/codecadet/projects/snakeMaster/snake/Resources/doraemonGame.wav");
+
+        try {
+
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+            AudioFormat format = audioStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            audioClipGame = (Clip) AudioSystem.getLine(info);
+            audioClipGame.open(audioStream);
+            audioClipGame.start();
+
+
+            System.out.println("Punch");
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
 
         /*snake = new Snake(grid);
         snake.setSimplegfxGrid(grid);
@@ -95,6 +123,7 @@ public class Game implements KeyboardHandler {
             if (doraemon.isDead()) {
                 System.out.println("GAME OVER");
                 System.out.println("Score: " + score);
+                audioClipGame.close();
                 break;
             }
 
