@@ -99,7 +99,6 @@ public class Doraemon extends Characters implements KeyboardHandler {
     }
 
     public int mvUp =0, mvDown = 0, mvLeft = 0, mvRight = 0;
-    // Clip audioClipIntroTheme;
     Clip audioClipHitWall;
 
     public boolean isHittingWall() {

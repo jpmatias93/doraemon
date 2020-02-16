@@ -9,6 +9,8 @@ public class Gigante extends Characters {
     private Picture picture;
     private GridDirection currentDirection;
     private int directionChangeLevel = 8;
+    private int lastX = 0;
+    private int lastY = 0;
 
 
     public Gigante(GridPosition pos, SimplegfxGrid grid, String string) {
@@ -47,11 +49,11 @@ public class Gigante extends Characters {
 
 
     public int lastX() {
-        return pos.getLastX();
+        return lastX;
     }
 
     public int lastY() {
-        return pos.getLastY();
+        return lastY;
     }
 
 
@@ -117,6 +119,9 @@ public class Gigante extends Characters {
     }
 
     public void accelerate(GridDirection direction) {
+
+        lastX = getX();
+        lastY = getY();
 
         GridDirection newDirection = direction;
 
