@@ -18,8 +18,6 @@ public class Gigante {
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
         setPicture(string);
 
-        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "gigante.png");
-
         this.pos = pos;
 
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
@@ -27,7 +25,7 @@ public class Gigante {
     }
 
     public void setPicture(String string) {
-        picture = new Picture(grid.columnToX(15), grid.rowToY(15), string);
+        picture = new Picture(grid.columnToX(10), grid.rowToY(10), string);
     }
 
 
@@ -89,7 +87,7 @@ public class Gigante {
         if (Math.random() > ((double) directionChangeLevel / 10)) {
             newDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
 
-            if (newDirection.isOpposite(currentDirection)) {
+            if (isOpposite(currentDirection)) {
                 return chooseDirection();
             }
 
@@ -113,13 +111,41 @@ public class Gigante {
         GridDirection newDirection = direction;
 
         if (isHittingWall()) {
-            newDirection = direction.oppositeDirection();
+            newDirection = oppositeDirection();
         }
 
         this.currentDirection = newDirection;
 
         getPos().moveDirection(newDirection, picture);
 
+    }
+
+    public boolean isOpposite(GridDirection direction) {
+        return direction.equals(oppositeDirection());
+    }
+
+    public GridDirection oppositeDirection() {
+
+        GridDirection opposite = null;
+
+        switch (currentDirection) {
+            case UP:
+                opposite = GridDirection.DOWN;
+                break;
+            case DOWN:
+                opposite = GridDirection.UP;
+                break;
+            case LEFT:
+                opposite = GridDirection.RIGHT;
+                break;
+            case RIGHT:
+                opposite = GridDirection.LEFT;
+                break;
+            case DEFAULT:
+                opposite = GridDirection.RIGHT;
+        }
+
+        return opposite;
     }
 
 

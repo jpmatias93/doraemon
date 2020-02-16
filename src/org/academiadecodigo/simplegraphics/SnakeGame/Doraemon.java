@@ -178,7 +178,7 @@ public class Doraemon implements KeyboardHandler {
 
                 doraemon.load("comeresquerda.png");
 
-                doraemon.load("doraemonLeft.png");
+                //doraemon.load("doraemonLeft.png");
             break;
             case KeyboardEvent.KEY_D:
                 if (currentDirection == GridDirection.LEFT) {
@@ -187,7 +187,7 @@ public class Doraemon implements KeyboardHandler {
                 currentDirection = GridDirection.RIGHT;
                 doraemon.load("comerdireita.png");
 
-                doraemon.load("doraemonRight.png");
+                //doraemon.load("doraemonRight.png");
                break;
             case KeyboardEvent.KEY_W:
                 if (currentDirection == GridDirection.DOWN) {
@@ -195,7 +195,7 @@ public class Doraemon implements KeyboardHandler {
                 }
                 currentDirection = GridDirection.UP;
                 //       doraemon.load("snakeHeadUp2.jpg");
-                doraemon.load("doraemonUp2.png");
+                doraemon.load("doraemonDown.png");
                break;
             case KeyboardEvent.KEY_S:
                 if (currentDirection == GridDirection.UP) {

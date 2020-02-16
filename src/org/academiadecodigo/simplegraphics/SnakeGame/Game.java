@@ -1,5 +1,7 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
+import org.academiadecodigo.simplegraphics.graphics.Color;
+import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -21,6 +23,10 @@ public class Game implements KeyboardHandler {
     private Picture picture;
     private Gigante suneo;
     private int highscore;
+    private int characters = 0;
+
+    private Picture picture1;
+    private Text text;
 
     private Picture pic;
 
@@ -40,12 +46,19 @@ public class Game implements KeyboardHandler {
 
         keyboard.addEventListener(space);
 
+        /*Rectangle rect = new Rectangle(680, 10, 200, 660);
+        rect.setColor(Color.BLACK);
+        rect.fill();
+        Text text = new Text(750, 370, "Score  " + score);
+        text.setColor(Color.WHITE);
+        Picture picture1 = new Picture(500, 70, "doraemonPontos.png");*/
+
 
         //this.pic = new Picture(0, 0, "intro.png");
         //pic.draw();
         grid.init();
 
-        picture = new Picture(0, 0, "init.png");
+        picture = new Picture(0, 0, "intro.png");
         picture.draw();
 
 
@@ -57,6 +70,10 @@ public class Game implements KeyboardHandler {
         try {
             if (e.getKey() == KeyboardEvent.KEY_SPACE) {
                 picture.delete();
+                //picture1.draw();
+                //text.grow(30,20);
+                //picture1.grow(-330, -370);
+                //text.draw();
                 grid.draw();
                 doraemon.draw();
                 food.draw();
@@ -74,17 +91,18 @@ public class Game implements KeyboardHandler {
 
     public void start() throws InterruptedException {
 
+
         grid.init();
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "gigante.png");
         suneo = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "suenodireita.png");
 
+
+
         while (true) {
             Thread.sleep(delay);
             doraemon.move();
-            gigante.move();
-            suneo.move();
 
             System.out.println(doraemon.getX());
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
@@ -93,17 +111,20 @@ public class Game implements KeyboardHandler {
                 food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
                 food.draw();
                 score = score + 2;
+                //text.setText(String.format("Score  " + score));
             }
 
             if (score == 0) {
                 delay = inidelay;
             }
             if (score > 5) {
+                characters = 2;
                 suneo.draw();
                 suneo.move();
                 delay = 170;
             }
             if (score > 10) {
+                characters = 3;
                 gigante.draw();
                 gigante.move();
                 delay = 125;
@@ -117,7 +138,7 @@ public class Game implements KeyboardHandler {
             }
 
             if (doraemon.isDead()) {
-                this.picture = new Picture(0, 0, "wasted.png");
+                this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                 this.picture.draw();
                 food.delete();
                 gigante.delete();
@@ -136,44 +157,49 @@ public class Game implements KeyboardHandler {
                 break;
             }
 
-            if (doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) {
-                this.picture = new Picture(0, 0, "wasted.png");
-                this.picture.draw();
-                food.delete();
-                gigante.delete();
-                suneo.delete();
-                score = 0;
-                doraemon.setDead();
-                gigante.delete();
-                suneo.delete();
-                grid.delete();
+            if (characters >= 3) {
+                if (doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) {
+                    doraemon.setDead();
+                    this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
+                    this.picture.draw();
+                    food.delete();
+                    gigante.delete();
+                    suneo.delete();
+                    score = 0;
+                    gigante.delete();
+                    suneo.delete();
+                    grid.delete();
 
 
-                reset();
-                System.out.println("GAME OVER");
-                System.out.println("Score: " + score);
-                break;
+                    reset();
+                    System.out.println("GAME OVER");
+                    System.out.println("Score: " + score);
+                    break;
 
+                }
+            }
+            if (characters >= 2) {
+                if (doraemon.getX() == suneo.getX() && suneo.getY() == doraemon.getY()) {
+                    doraemon.setDead();
+                    this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
+                    this.picture.draw();
+                    food.delete();
+                    gigante.delete();
+                    suneo.delete();
+                    score = 0;
+                    gigante.delete();
+                    suneo.delete();
+                    grid.delete();
+
+
+                    reset();
+                    System.out.println("GAME OVER");
+                    System.out.println("Score: " + score);
+                    break;
+                }
             }
         }
-            if (doraemon.getX() == suneo.getX() && suneo.getY() == doraemon.getY()) {
-                this.picture = new Picture(0, 0, "wasted.png");
-                this.picture.draw();
-                food.delete();
-                gigante.delete();
-                suneo.delete();
-                score = 0;
-                doraemon.setDead();
-                gigante.delete();
-                suneo.delete();
-                grid.delete();
 
-
-                reset();
-                System.out.println("GAME OVER");
-                System.out.println("Score: " + score);
-
-            }
 
         }
 
@@ -187,7 +213,7 @@ public class Game implements KeyboardHandler {
 
     public void gameOver() throws InterruptedException {
         doraemon.setDead();
-        this.picture = new Picture(0, 0, "wasted.png");
+        this.picture = new Picture(0, 0, "gameover.png");
         this.picture.draw();
         food.delete();
         gigante.delete();

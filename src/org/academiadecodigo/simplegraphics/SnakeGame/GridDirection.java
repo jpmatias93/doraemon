@@ -7,7 +7,7 @@ public enum GridDirection {
     DEFAULT,
     RIGHT;
 
-    public boolean isOpposite(GridDirection direction) {
+    /*public boolean isOpposite(GridDirection direction) {
         return direction.equals(oppositeDirection());
     }
 
@@ -33,6 +33,6 @@ public enum GridDirection {
         }
 
         return opposite;
-    }
+    }*/
 
 }
