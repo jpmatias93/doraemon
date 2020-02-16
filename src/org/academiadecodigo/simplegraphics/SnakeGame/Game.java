@@ -17,9 +17,12 @@ public class Game implements KeyboardHandler {
     private Gigante gigante;
     private int score;
     private Keyboard keyboard;
+
     private Picture picture;
     private Gigante suneo;
     private int highscore;
+
+    private Picture pic;
 
 
     public Game(int col, int row, int delay) {
@@ -37,6 +40,10 @@ public class Game implements KeyboardHandler {
 
         keyboard.addEventListener(space);
 
+
+        //this.pic = new Picture(0, 0, "intro.png");
+        //pic.draw();
+        grid.init();
 
         picture = new Picture(0, 0, "init.png");
         picture.draw();
@@ -79,6 +86,7 @@ public class Game implements KeyboardHandler {
             gigante.move();
             suneo.move();
 
+            System.out.println(doraemon.getX());
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
 
                 food.setDead();

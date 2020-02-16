@@ -18,13 +18,15 @@ public class Food {
         this.pos= pos;
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
+
         this.picture = new Picture(randomX,randomY, "doraiaki.png");
 
     }
 
 
     public void draw() {
-        picture.draw();
+
+      picture.draw();
     }
 
 

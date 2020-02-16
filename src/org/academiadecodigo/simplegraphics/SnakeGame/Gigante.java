@@ -11,13 +11,15 @@ public class Gigante {
     private int directionChangeLevel = 8;
 
 
-
     public Gigante(GridPosition pos, SimplegfxGrid grid, String string) {
         this.grid = grid;
 
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
         setPicture(string);
+
+        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "gigante.png");
+
         this.pos = pos;
 
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
@@ -29,12 +31,11 @@ public class Gigante {
     }
 
 
-
-    public void draw(){
+    public void draw() {
         picture.draw();
     }
 
-    public void delete(){
+    public void delete() {
         picture.delete();
     }
 
@@ -79,7 +80,6 @@ public class Gigante {
         return false;
 
     }
-
 
 
     public GridDirection chooseDirection() {
