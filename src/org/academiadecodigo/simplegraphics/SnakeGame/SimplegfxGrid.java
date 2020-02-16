@@ -23,14 +23,23 @@ public class SimplegfxGrid implements Grid {
 
 
     public void init() {
-        field = new Rectangle(0, 0, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
-        field.setColor(Color.WHITE);
-        field.fill();
+       //
+        // field = new Rectangle(0, 0, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
+        //field.setColor(Color.WHITE);
+        //field.fill();
+        field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
+
         picture = new Picture(PADDING, PADDING, "snakeField2.jpg");
-        //System.out.println(picture.getWidth());
-        //System.out.println(picture.getHeight());
-        //System.out.println(picture.pixels());
+
+    }
+
+    public void draw(){
+        field.draw();
         picture.draw();
+    }
+
+    public void delete(){
+        field.delete();
     }
 
 
@@ -64,10 +73,6 @@ public class SimplegfxGrid implements Grid {
 
     }
 
-        // creates a random SimplegfxGridPosition
-    /*public GridPosition makeGridPosition() {
-        return new SimplegfxGridPosition(this);
-    }*/
 
     public GridPosition makeGridPosition(int col, int row) {
         return new SimplegfxGridPosition(col, row, this);
@@ -85,23 +90,6 @@ public class SimplegfxGrid implements Grid {
     public int getRows() {
         return rows;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -12,17 +12,30 @@ public class Gigante {
 
 
 
-    public Gigante(GridPosition pos, SimplegfxGrid grid) {
+    public Gigante(GridPosition pos, SimplegfxGrid grid, String string) {
         this.grid = grid;
 
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
-        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "snakeApple2.jpg");
+        setPicture(string);
         this.pos = pos;
-        picture.draw();
 
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
-        this.currentDirection = GridDirection.RIGHT;
+        this.currentDirection = GridDirection.LEFT;
+    }
+
+    public void setPicture(String string) {
+        picture = new Picture(grid.columnToX(15), grid.rowToY(15), string);
+    }
+
+
+
+    public void draw(){
+        picture.draw();
+    }
+
+    public void delete(){
+        picture.delete();
     }
 
     public int getX() {
@@ -68,32 +81,6 @@ public class Gigante {
     }
 
 
-   /* public boolean isHittingWall() {
-        switch (currentDirection) {
-            case LEFT:
-                if (picture.getX() + grid.getCellsize() == grid.getPadding()) {
-                    return true;
-
-                }
-            case RIGHT:
-                if (picture.getX() == grid.getPadding() + grid.getWidth()){
-                    //System.out.println(doraemon.getX());
-                    return true;
-                }
-            case UP:
-                if (picture.getY() + grid.getCellsize() == grid.getPadding()) {
-                    return true;
-                }
-            case DOWN:
-                if (picture.getY() == grid.getPadding() + grid.getHeigth() ){
-                    return true;
-                }
-        }
-
-        return false;
-
-    }
-*/
 
     public GridDirection chooseDirection() {
 
@@ -134,32 +121,6 @@ public class Gigante {
         getPos().moveDirection(newDirection, picture);
 
     }
-
-    /*public boolean isOpposite(GridDirection direction) {
-        return direction.equals(oppositeDirection());
-    }
-
-    public GridDirection oppositeDirection() {
-
-        GridDirection opposite = null;
-
-        switch (currentDirection) {
-            case UP:
-                opposite = GridDirection.DOWN;
-                break;
-            case DOWN:
-                opposite = GridDirection.UP;
-                break;
-            case LEFT:
-                opposite = GridDirection.RIGHT;
-                break;
-            case RIGHT:
-                opposite = GridDirection.LEFT;
-                break;
-        }
-
-        return opposite;
-    }*/
 
 
 }
