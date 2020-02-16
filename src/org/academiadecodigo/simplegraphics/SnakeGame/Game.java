@@ -1,13 +1,14 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
+
+import javax.sound.sampled.*;
+import java.io.File;
 
 public class Game implements KeyboardHandler {
 
@@ -34,6 +35,7 @@ public class Game implements KeyboardHandler {
     private Text text;
 
     private Picture pic;
+    private File audioFile;
 
 
     public Game(int col, int row, int delay) {
@@ -42,6 +44,14 @@ public class Game implements KeyboardHandler {
         this.delay = delay;
         this.keyboard = new Keyboard(this);
     }
+
+    public int mvUp =0, mvDown = 0, mvLeft = 0, mvRight = 0;
+    Clip audioClipIntroTheme;
+    Clip audioClipGame;
+    Clip audioGameOver;
+    Clip audioEat;
+    Clip audioPunch;
+
 
     public void init() {
 
@@ -61,6 +71,35 @@ public class Game implements KeyboardHandler {
         grid.init();
 
         picture = new Picture(grid.getPadding(), grid.getPadding(), "intro.png");
+        audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/doraemonIntroTheme.wav");
+
+        try {
+
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+            AudioFormat format = audioStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            audioClipIntroTheme = (Clip) AudioSystem.getLine(info);
+            audioClipIntroTheme.open(audioStream);
+            audioClipIntroTheme.start();
+
+
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+
+        /*snake = new Snake(grid);
+        snake.setSimplegfxGrid(grid);
+        snake.Snakekeyboard(snake);
+        tail = new Tail (grid, snake);
+        tail.setSimplegfxGrid(grid);
+        */
+        doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+        food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "gigante.png");
+        picture = new Picture(0, 0, "intro.png");
         picture.draw();
 
 
@@ -75,12 +114,9 @@ public class Game implements KeyboardHandler {
 
         try {
             if (!spaceBar) {
-
-
                 if (e.getKey() == KeyboardEvent.KEY_SPACE) {
                     picture.delete();
                     //picture1.draw();
-
 
                     //text.draw();
                     grid.draw();
@@ -88,16 +124,33 @@ public class Game implements KeyboardHandler {
                     food.draw();
                     suneo.draw();
 
+                    audioClipIntroTheme.close();
+
+                    audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/doraemonGame.wav");
+
+                    try {
+
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                        AudioFormat format = audioStream.getFormat();
+                        DataLine.Info info = new DataLine.Info(Clip.class, format);
+                        audioClipGame = (Clip) AudioSystem.getLine(info);
+                        audioClipGame.open(audioStream);
+                        audioClipGame.start();
+
+                    } catch (Exception ex) {
+                        System.err.println(ex.getMessage());
+                    }
+
                 }
                 spaceBar = true;
                 return;
             }
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
+            } catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
 
     }
-
 
     @Override
     public void keyReleased(KeyboardEvent e) {
@@ -141,6 +194,22 @@ public class Game implements KeyboardHandler {
             //System.out.println(doraemon.getX());
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
 
+                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/eatSound.wav");
+
+                try {
+
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                    AudioFormat format = audioStream.getFormat();
+                    DataLine.Info info = new DataLine.Info(Clip.class, format);
+                    audioEat = (Clip) AudioSystem.getLine(info);
+                    audioEat.open(audioStream);
+                    audioEat.start();
+
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+
                 food.setDead();
                 food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
                 food.draw();
@@ -171,6 +240,7 @@ public class Game implements KeyboardHandler {
             }
 
             if (doraemon.isDead()) {
+                audioClipGame.close();
                 this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                 this.picture.draw();
                 food.delete();
@@ -184,6 +254,23 @@ public class Game implements KeyboardHandler {
                 spaceBar = false;
                 // System.out.println(doraemon.getX());
                 //System.out.println(doraemon.getY());
+
+                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/pacmanGameOver.wav");
+
+                try {
+
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                    AudioFormat format = audioStream.getFormat();
+                    DataLine.Info info = new DataLine.Info(Clip.class, format);
+                    audioGameOver = (Clip) AudioSystem.getLine(info);
+                    audioGameOver.open(audioStream);
+                    audioGameOver.start();
+
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+
                 reset();
                 System.out.println("GAME OVER");
                 System.out.println("Score: " + score);
@@ -194,6 +281,7 @@ public class Game implements KeyboardHandler {
 
             if (characters >= 3) {
                 if (doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) {
+                    audioClipGame.close();
                     doraemon.setDead();
                     this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                     this.picture.draw();
@@ -204,6 +292,39 @@ public class Game implements KeyboardHandler {
                     gigante.delete();
                     suneo.delete();
                     grid.delete();
+
+                    audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/punchSound.wav");
+
+                    try {
+
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                        AudioFormat format = audioStream.getFormat();
+                        DataLine.Info info = new DataLine.Info(Clip.class, format);
+                        audioPunch = (Clip) AudioSystem.getLine(info);
+                        audioPunch.open(audioStream);
+                        audioPunch.start();
+
+                    } catch (Exception ex) {
+                        System.err.println(ex.getMessage());
+                    }
+
+
+                    audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/pacmanGameOver.wav");
+
+                    try {
+
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                        AudioFormat format = audioStream.getFormat();
+                        DataLine.Info info = new DataLine.Info(Clip.class, format);
+                        audioGameOver = (Clip) AudioSystem.getLine(info);
+                        audioGameOver.open(audioStream);
+                        audioGameOver.start();
+
+                    } catch (Exception ex) {
+                        System.err.println(ex.getMessage());
+                    }
 
 
                     reset();
@@ -238,6 +359,10 @@ public class Game implements KeyboardHandler {
 
 
               /*  if (doraemon.getX() == suneo.getX() && suneo.getY() == doraemon.getY()) {
+
+            if (characters >= 2) {
+                if (doraemon.getX() == suneo.getX() && suneo.getY() == doraemon.getY()) {
+                    audioClipGame.close();
                     doraemon.setDead();
                     this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                     this.picture.draw();
@@ -249,6 +374,19 @@ public class Game implements KeyboardHandler {
                     suneo.delete();
                     grid.delete();
 
+                         try {
+
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                        AudioFormat format = audioStream.getFormat();
+                        DataLine.Info info = new DataLine.Info(Clip.class, format);
+                        audioGameOver = (Clip) AudioSystem.getLine(info);
+                        audioGameOver.open(audioStream);
+                        audioGameOver.start();
+
+                    } catch (Exception ex) {
+                        System.err.println(ex.getMessage());
+                    }
 
                     reset();
                     System.out.println("GAME OVER");
@@ -270,6 +408,7 @@ public class Game implements KeyboardHandler {
 
 
     public void gameOver() throws InterruptedException {
+        audioClipGame.close();
         doraemon.setDead();
         this.picture = new Picture(0, 0, "gameover.png");
         this.picture.draw();
