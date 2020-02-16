@@ -1,13 +1,14 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.InputStream;
 
 public class Doraemon extends Characters implements KeyboardHandler {
 
@@ -29,7 +30,7 @@ public class Doraemon extends Characters implements KeyboardHandler {
         //this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "snakeHeadRight2.jpg");
 
         //this.doraemon = new Rectangle(grid.columnToX(15), grid.rowToY(15),grid.getCellsize(),grid.getCellsize());
-        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "doraemonRightFinal.png");
+        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "resources/doraemonRightFinal.png");
         //this.doraemon = new Picture(50,50, "BwPMAyDK_400x400.jpg");
         this.pos = pos;
         keyboard = new Keyboard(this);
@@ -164,11 +165,14 @@ public class Doraemon extends Characters implements KeyboardHandler {
 
         getPos().moveDirection(direction, doraemon);
         if (isHittingWall()) {
-            audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/doraemonCrash.wav");
+           // audioFile = new File("resources/doraemonCrash.wav");
 
             try {
+                InputStream audiosrc = getClass().getResourceAsStream("/resources/doraemonCrash.wav");
+                InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
 
                 AudioFormat format = audioStream.getFormat();
                 DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -215,7 +219,7 @@ public class Doraemon extends Characters implements KeyboardHandler {
 
                 //doraemon.load("comeresquerda.png");
 
-                doraemon.load("doraemonLeftFinal.png");
+                doraemon.load("resources/doraemonLeftFinal.png");
             break;
             case KeyboardEvent.KEY_D:
                 if (currentDirection == GridDirection.LEFT) {
@@ -224,7 +228,7 @@ public class Doraemon extends Characters implements KeyboardHandler {
                 currentDirection = GridDirection.RIGHT;
                 //doraemon.load("comerdireita.png");
 
-                doraemon.load("doraemonRightFinal.png");
+                doraemon.load("resources/doraemonRightFinal.png");
                break;
             case KeyboardEvent.KEY_W:
                 if (currentDirection == GridDirection.DOWN) {
@@ -232,7 +236,7 @@ public class Doraemon extends Characters implements KeyboardHandler {
                 }
                 currentDirection = GridDirection.UP;
                 //       doraemon.load("snakeHeadUp2.jpg");
-                doraemon.load("doraemonUpFinal2.png");
+                doraemon.load("resources/doraemonUpFinal2.png");
                break;
             case KeyboardEvent.KEY_S:
                 if (currentDirection == GridDirection.UP) {
@@ -240,7 +244,7 @@ public class Doraemon extends Characters implements KeyboardHandler {
                 }
                 currentDirection = GridDirection.DOWN;
                //   doraemon.load("snakeHeadDown2.jpg");
-               doraemon.load("doraemonDown.png");
+               doraemon.load("resources/doraemonDown.png");
                break;
         }
 

@@ -10,7 +10,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 import javax.sound.sampled.*;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.InputStream;
 
 public class Game implements KeyboardHandler {
 
@@ -43,6 +45,7 @@ public class Game implements KeyboardHandler {
     private Picture suneoGame;
     private Text giganteText;
     private Text suneoText;
+    //private Clip audioFile;
 
 
     public Game(int col, int row, int delay) {
@@ -79,13 +82,19 @@ public class Game implements KeyboardHandler {
 
         grid.init();
 
-        picture = new Picture(grid.getPadding(), grid.getPadding(), "intro.png");
+        picture = new Picture(grid.getPadding(), grid.getPadding(), "resources/intro.png");
 
-        audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/doraemonIntroTheme.wav");
+
+        //audioFile = new File("resources/doraemonIntroTheme.wav");
+
+
+
 
         try {
+            InputStream audiosrc = getClass().getResourceAsStream("/resources/doraemonIntroTheme.wav");
+            InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
 
             AudioFormat format = audioStream.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -107,8 +116,8 @@ public class Game implements KeyboardHandler {
         */
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
-        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "gigante.png");
-        picture = new Picture(grid.getPadding(), grid.getPadding(), "introFinal.png");
+        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "resources/gigante.png");
+        picture = new Picture(grid.getPadding(), grid.getPadding(), "resources/introFinal.png");
         picture.draw();
 
 
@@ -135,7 +144,7 @@ public class Game implements KeyboardHandler {
                     text.grow(40, 20);
                     text.draw();
 
-                    picture1 = new Picture(grid.getPadding() + grid.getWidth() + 40, 510, "doraemonScoreFinal.png");
+                    picture1 = new Picture(grid.getPadding() + grid.getWidth() + 40, 510, "resources/doraemonScoreFinal.png");
                     //picture1.grow(-330, -370);
                     picture1.draw();
 
@@ -145,11 +154,16 @@ public class Game implements KeyboardHandler {
 
                     audioClipIntroTheme.close();
 
-                    audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/doraemonGame.wav");
+                    //audioFile = new File("resources/doraemonGame.wav");
 
                     try {
+                        InputStream audiosrc = getClass().getResourceAsStream("/resources/doraemonGame.wav");
+                        InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
+
 
                         AudioFormat format = audioStream.getFormat();
                         DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -191,7 +205,7 @@ public class Game implements KeyboardHandler {
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         //gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "giganteFinal.png");
-        suneo = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "suneoFinal2.png");
+        suneo = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "resources/suneoFinal2.png");
 
         character = new Characters[]{doraemon, suneo};
 
@@ -212,11 +226,16 @@ public class Game implements KeyboardHandler {
             //System.out.println(doraemon.getX());
             if (doraemon.getX() == food.getX() && doraemon.getY() == food.getY()) {
 
-                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/eatSound.wav");
+               // audioFile = new File("resources/eatSound.wav");
 
                 try {
 
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    InputStream audiosrc = getClass().getResourceAsStream("/resources/eatSound.wav");
+                    InputStream bufferedIn = new BufferedInputStream(audiosrc);
+
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                     AudioFormat format = audioStream.getFormat();
                     DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -228,11 +247,15 @@ public class Game implements KeyboardHandler {
                     System.err.println(ex.getMessage());
                 }
 
-                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/yahooMario.wav");
+               // audioFile = new File("resources/yahooMario.wav");
 
                 try {
+                    InputStream audiosrc = getClass().getResourceAsStream("/resources/yahooMario.wav");
+                    InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                     AudioFormat format = audioStream.getFormat();
                     DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -260,7 +283,7 @@ public class Game implements KeyboardHandler {
                 suneo.draw();
                 suneo.move();
 
-                suneoGame = new Picture(700, -30, "suneoGame.png");
+                suneoGame = new Picture(700, -30, "resources/suneoGame.png");
                 suneoGame.grow(-55, -85);
                 suneoGame.draw();
 
@@ -292,7 +315,7 @@ public class Game implements KeyboardHandler {
 
                 gigante.draw();
 
-                giganteGame = new Picture(655, 270, "giganteGame.png");
+                giganteGame = new Picture(655, 270, "resources/giganteGame.png");
                 giganteGame.grow(-30, -20);
                 giganteGame.draw();
 
@@ -314,9 +337,9 @@ public class Game implements KeyboardHandler {
             }
 
             if (doraemon.isDead()) {
-                picture1.load("doraemonMortoFinal.png");
+                picture1.load("resources/doraemonMortoFinal.png");
                 audioClipGame.close();
-                this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
+                this.picture = new Picture(grid.getPadding(), grid.getPadding(), "resources/gameover.png");
                 this.picture.draw();
                 food.delete();
                 gigante.delete();
@@ -332,11 +355,15 @@ public class Game implements KeyboardHandler {
                 //System.out.println(doraemon.getY());
 
 
-                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/pacmanGameOver.wav");
+              //  audioFile = new File("resources/pacmanGameOver.wav");
 
                 try {
+                    InputStream audiosrc = getClass().getResourceAsStream("/resources/pacmanGameOver.wav");
+                    InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                     AudioFormat format = audioStream.getFormat();
                     DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -359,10 +386,10 @@ public class Game implements KeyboardHandler {
             if ((doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) ||
                     (doraemon.getX() == gigante.lastX() && doraemon.getY() == gigante.getY()) ||
                     (doraemon.getY() == gigante.lastY() && doraemon.getX() == gigante.getX())) {
-                picture1.load("doraemonMortoFinal.png");
+                picture1.load("resources/doraemonMortoFinal.png");
                 audioClipGame.close();
                 doraemon.setDead();
-                this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
+                this.picture = new Picture(grid.getPadding(), grid.getPadding(), "resources/gameover.png");
                 this.picture.draw();
                 food.delete();
                 gigante.delete();
@@ -374,11 +401,15 @@ public class Game implements KeyboardHandler {
                // grid.delete();
                 spaceBar = false;
 
-                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/punchSound.wav");
+             //   audioFile = new File("resources/punchSound.wav");
 
                 try {
+                    InputStream audiosrc = getClass().getResourceAsStream("/resources/punchSound.wav");
+                    InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                     AudioFormat format = audioStream.getFormat();
                     DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -391,11 +422,15 @@ public class Game implements KeyboardHandler {
                 }
 
 
-                audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/pacmanGameOver.wav");
+               // audioFile = new File("resources/pacmanGameOver.wav");
 
                 try {
+                    InputStream audiosrc = getClass().getResourceAsStream("/resources/pacmanGameOver.wav");
+                    InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                     AudioFormat format = audioStream.getFormat();
                     DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -423,10 +458,10 @@ public class Game implements KeyboardHandler {
                 if ((doraemon.getX() == suneo.getX() && doraemon.getY() == suneo.getY()) ||
                         (doraemon.getX() == suneo.lastX() && doraemon.getY() == suneo.getY()) ||
                         (doraemon.getY() == suneo.lastY() && doraemon.getX() == suneo.getX())) {
-                    picture1.load("doraemonMortoFinal.png");
+                    picture1.load("resources/doraemonMortoFinal.png");
                     audioClipGame.close();
                     doraemon.setDead();
-                    this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
+                    this.picture = new Picture(grid.getPadding(), grid.getPadding(), "resources/gameover.png");
                     this.picture.draw();
                     food.delete();
                     gigante.delete();
@@ -438,11 +473,15 @@ public class Game implements KeyboardHandler {
                     characters = 0;
                     //grid.delete();
 
-                    audioFile = new File("/Users/codecadet/joaomatias/projects/snake/Resources/pacmanGameOver.wav");
+                    audioFile = new File("resources/pacmanGameOver.wav");
 
                     try {
+                        InputStream audiosrc = getClass().getResourceAsStream("/resources/pacmanGameOver.wav");
+                        InputStream bufferedIn = new BufferedInputStream(audiosrc);
 
-                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+                        AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+
+
 
                         AudioFormat format = audioStream.getFormat();
                         DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -476,7 +515,7 @@ public class Game implements KeyboardHandler {
         public void gameOver () throws InterruptedException {
             audioClipGame.close();
             doraemon.setDead();
-            this.picture = new Picture(0, 0, "gameover.png");
+            this.picture = new Picture(0, 0, "resources/gameover.png");
             this.picture.draw();
             food.delete();
             gigante.delete();

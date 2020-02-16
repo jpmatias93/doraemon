@@ -6,8 +6,6 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 
-import java.util.Objects;
-
 
 public class Snake implements KeyboardHandler {
 
@@ -33,7 +31,7 @@ public class Snake implements KeyboardHandler {
 
     public Snake(SimplegfxGrid grid) {
 
-        snake = new Picture(200, 200, "doraemon.jpg");
+        snake = new Picture(200, 200, "resources/doraemon.jpg");
         snake.grow(-150, -200);
         snake.draw();
         direction = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];

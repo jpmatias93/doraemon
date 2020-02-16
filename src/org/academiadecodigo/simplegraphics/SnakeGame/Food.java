@@ -1,8 +1,5 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Ellipse;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
 public class Food {
@@ -19,7 +16,7 @@ public class Food {
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
 
-        this.picture = new Picture(randomX,randomY, "dorayakiFinal.png");
+        this.picture = new Picture(randomX,randomY, "resources/dorayakiFinal.png");
 
     }
 
