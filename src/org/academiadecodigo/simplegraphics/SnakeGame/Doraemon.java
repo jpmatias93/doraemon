@@ -7,6 +7,9 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
+import javax.sound.sampled.*;
+import java.io.File;
+
 public class Doraemon implements KeyboardHandler {
 
 
@@ -15,6 +18,7 @@ public class Doraemon implements KeyboardHandler {
     private boolean dead = false;
     private Keyboard keyboard;
     private Picture doraemon;
+    private File audioFile;
 
     protected GridDirection currentDirection;
 
@@ -86,11 +90,16 @@ public class Doraemon implements KeyboardHandler {
 
     }
 
+    public int mvUp =0, mvDown = 0, mvLeft = 0, mvRight = 0;
+    // Clip audioClipIntroTheme;
+    Clip audioClipHitWall;
+
     public boolean isHittingWall() {
         switch (currentDirection) {
             case LEFT:
                 if (doraemon.getX() + grid.getCellsize() == grid.getPadding()) {
                     doraemon.translate(grid.getCellsize(), 0);
+
                     return true;
 
                 }
@@ -98,16 +107,19 @@ public class Doraemon implements KeyboardHandler {
                 if (doraemon.getX() == grid.getPadding() + grid.getWidth()){
                     //System.out.println(doraemon.getX());
                     doraemon.translate(- grid.getCellsize(), 0);
+
                     return true;
                 }
             case UP:
                 if (doraemon.getY() + grid.getCellsize() == grid.getPadding()) {
                     doraemon.translate(0, grid.getCellsize());
+
                     return true;
                 }
             case DOWN:
                 if (doraemon.getY() == grid.getPadding() + grid.getHeigth()){
                     doraemon.translate(0, -grid.getCellsize());
+
                     return true;
                 }
         }
@@ -145,7 +157,25 @@ public class Doraemon implements KeyboardHandler {
 
         getPos().moveDirection(direction, doraemon);
         if (isHittingWall()) {
+            audioFile = new File("/Users/codecadet/projects/snakeMaster/snake/Resources/doraemonCrash.wav");
+
+            try {
+
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                AudioFormat format = audioStream.getFormat();
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
+                audioClipHitWall = (Clip) AudioSystem.getLine(info);
+                audioClipHitWall.open(audioStream);
+                audioClipHitWall.start();
+
+
+
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
             setDead();
+
         }
     }
 

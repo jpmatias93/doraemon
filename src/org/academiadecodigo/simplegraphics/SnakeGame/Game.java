@@ -1,7 +1,5 @@
 package org.academiadecodigo.simplegraphics.SnakeGame;
 
-import org.academiadecodigo.simplegraphics.graphics.Color;
-import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.graphics.Text;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardEvent;
@@ -43,6 +41,7 @@ public class Game implements KeyboardHandler {
     }
 
     public int mvUp =0, mvDown = 0, mvLeft = 0, mvRight = 0;
+    Clip audioClipIntroTheme;
     Clip audioClipGame;
 
 
@@ -66,7 +65,7 @@ public class Game implements KeyboardHandler {
         //pic.draw();
         grid.init();
 
-        audioFile = new File("/Users/codecadet/projects/snakeMaster/snake/Resources/doraemonGame.wav");
+        audioFile = new File("/Users/codecadet/projects/snakeMaster/snake/Resources/doraemonIntroTheme.wav");
 
         try {
 
@@ -74,12 +73,11 @@ public class Game implements KeyboardHandler {
 
             AudioFormat format = audioStream.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format);
-            audioClipGame = (Clip) AudioSystem.getLine(info);
-            audioClipGame.open(audioStream);
-            audioClipGame.start();
+            audioClipIntroTheme = (Clip) AudioSystem.getLine(info);
+            audioClipIntroTheme.open(audioStream);
+            audioClipIntroTheme.start();
 
 
-            System.out.println("Punch");
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -94,7 +92,7 @@ public class Game implements KeyboardHandler {
         */
         doraemon = new Doraemon(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
         food = new Food(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
-        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid);
+        gigante = new Gigante(this.grid.makeGridPosition(grid.getCols(), grid.getRows()), this.grid, "gigante.png");
         picture = new Picture(0, 0, "intro.png");
         picture.draw();
 
@@ -107,6 +105,26 @@ public class Game implements KeyboardHandler {
         try {
             if (e.getKey() == KeyboardEvent.KEY_SPACE) {
                 picture.delete();
+                audioClipIntroTheme.close();
+
+                audioFile = new File("/Users/codecadet/projects/snakeMaster/snake/Resources/doraemonGame.wav");
+
+                try {
+
+                    AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+
+                    AudioFormat format = audioStream.getFormat();
+                    DataLine.Info info = new DataLine.Info(Clip.class, format);
+                    audioClipGame = (Clip) AudioSystem.getLine(info);
+                    audioClipGame.open(audioStream);
+                    audioClipGame.start();
+
+
+
+                } catch (Exception ex) {
+                    System.err.println(ex.getMessage());
+                }
+
                 //picture1.draw();
                 //text.grow(30,20);
                 //picture1.grow(-330, -370);
@@ -197,6 +215,7 @@ public class Game implements KeyboardHandler {
 
             if (characters >= 3) {
                 if (doraemon.getX() == gigante.getX() && doraemon.getY() == gigante.getY()) {
+                    audioClipGame.close();
                     doraemon.setDead();
                     this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                     this.picture.draw();
@@ -218,6 +237,7 @@ public class Game implements KeyboardHandler {
             }
             if (characters >= 2) {
                 if (doraemon.getX() == suneo.getX() && suneo.getY() == doraemon.getY()) {
+                    audioClipGame.close();
                     doraemon.setDead();
                     this.picture = new Picture(grid.getPadding(), grid.getPadding(), "gameover.png");
                     this.picture.draw();
@@ -250,6 +270,7 @@ public class Game implements KeyboardHandler {
 
 
     public void gameOver() throws InterruptedException {
+        audioClipGame.close();
         doraemon.setDead();
         this.picture = new Picture(0, 0, "gameover.png");
         this.picture.draw();
