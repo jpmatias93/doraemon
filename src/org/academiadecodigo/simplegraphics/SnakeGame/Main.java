@@ -18,6 +18,7 @@ public class Main {
        Game game = new Game(22,22,200);
 
        game.init();
+
        game.start();
 
         /*

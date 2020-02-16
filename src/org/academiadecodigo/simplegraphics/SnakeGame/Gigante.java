@@ -11,18 +11,30 @@ public class Gigante {
     private int directionChangeLevel = 8;
 
 
-
-    public Gigante(GridPosition pos, SimplegfxGrid grid) {
+    public Gigante(GridPosition pos, SimplegfxGrid grid, String string) {
         this.grid = grid;
 
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
-        this.picture = new Picture(grid.columnToX(20), grid.rowToY(20), "gigante.png");
+        setPicture(string);
+
         this.pos = pos;
-        picture.draw();
 
         //this.currentDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
-        this.currentDirection = GridDirection.RIGHT;
+        this.currentDirection = GridDirection.LEFT;
+    }
+
+    public void setPicture(String string) {
+        picture = new Picture(grid.columnToX(10), grid.rowToY(10), string);
+    }
+
+
+    public void draw() {
+        picture.draw();
+    }
+
+    public void delete() {
+        picture.delete();
     }
 
     public int getX() {
@@ -68,33 +80,6 @@ public class Gigante {
     }
 
 
-   /* public boolean isHittingWall() {
-        switch (currentDirection) {
-            case LEFT:
-                if (picture.getX() + grid.getCellsize() == grid.getPadding()) {
-                    return true;
-
-                }
-            case RIGHT:
-                if (picture.getX() == grid.getPadding() + grid.getWidth()){
-                    //System.out.println(doraemon.getX());
-                    return true;
-                }
-            case UP:
-                if (picture.getY() + grid.getCellsize() == grid.getPadding()) {
-                    return true;
-                }
-            case DOWN:
-                if (picture.getY() == grid.getPadding() + grid.getHeigth() ){
-                    return true;
-                }
-        }
-
-        return false;
-
-    }
-*/
-
     public GridDirection chooseDirection() {
 
         GridDirection newDirection = currentDirection;
@@ -102,7 +87,7 @@ public class Gigante {
         if (Math.random() > ((double) directionChangeLevel / 10)) {
             newDirection = GridDirection.values()[(int) (Math.random() * GridDirection.values().length)];
 
-            if (newDirection.isOpposite(currentDirection)) {
+            if (isOpposite(currentDirection)) {
                 return chooseDirection();
             }
 
@@ -126,7 +111,7 @@ public class Gigante {
         GridDirection newDirection = direction;
 
         if (isHittingWall()) {
-            newDirection = direction.oppositeDirection();
+            newDirection = oppositeDirection();
         }
 
         this.currentDirection = newDirection;
@@ -135,7 +120,7 @@ public class Gigante {
 
     }
 
-    /*public boolean isOpposite(GridDirection direction) {
+    public boolean isOpposite(GridDirection direction) {
         return direction.equals(oppositeDirection());
     }
 
@@ -156,10 +141,12 @@ public class Gigante {
             case RIGHT:
                 opposite = GridDirection.LEFT;
                 break;
+            case DEFAULT:
+                opposite = GridDirection.RIGHT;
         }
 
         return opposite;
-    }*/
+    }
 
 
 }
