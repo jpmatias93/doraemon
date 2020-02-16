@@ -25,7 +25,9 @@ public interface GridPosition {
 
     public void hide();
 
+    public int getLastX();
 
+    public int getLastY();
 
 
 

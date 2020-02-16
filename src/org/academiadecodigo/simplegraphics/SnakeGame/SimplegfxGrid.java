@@ -24,12 +24,12 @@ public class SimplegfxGrid implements Grid {
 
     public void init() {
   //
-        // field = new Rectangle(0, 0, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
+        //field = new Rectangle(PADDING, PADDING, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
         //field.setColor(Color.WHITE);
         //field.fill();
         field = new Rectangle(PADDING, PADDING, cols * cellsize, rows * cellsize);
 
-        picture = new Picture(PADDING, PADDING, "snakeField2.jpg");
+        //xpicture = new Picture(PADDING, PADDING, "snakeField2.jpg");
 
     }
 
@@ -38,7 +38,7 @@ public class SimplegfxGrid implements Grid {
         field = new Rectangle(0, 0, cols * cellsize + 20*PADDING, rows * cellsize + 3*PADDING);
         field.setColor(Color.WHITE);
         field.fill();
-        picture = new Picture(PADDING, PADDING, "background.png");
+        picture = new Picture(PADDING, PADDING, "fundoFinal.png");
         //System.out.println(picture.getWidth());
         //System.out.println(picture.getHeight());
         //System.out.println(picture.pixels());

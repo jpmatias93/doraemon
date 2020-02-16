@@ -19,7 +19,7 @@ public class Food {
         int randomX = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getCols());
         int randomY = grid.getPadding() + grid.getCellsize() * (int) (Math.random() * grid.getRows());
 
-        this.picture = new Picture(randomX,randomY, "doraiaki.png");
+        this.picture = new Picture(randomX,randomY, "dorayakiFinal.png");
 
     }
 

@@ -7,7 +7,7 @@ import org.academiadecodigo.simplegraphics.keyboard.KeyboardEventType;
 import org.academiadecodigo.simplegraphics.keyboard.KeyboardHandler;
 import org.academiadecodigo.simplegraphics.pictures.Picture;
 
-public class Doraemon implements KeyboardHandler {
+public class Doraemon extends Characters implements KeyboardHandler {
 
 
     private GridPosition pos;
@@ -22,12 +22,12 @@ public class Doraemon implements KeyboardHandler {
     public Doraemon(GridPosition pos, SimplegfxGrid grid) {
         this.grid = grid;
 
-        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "snakeHeadRight2.jpg");
+        //this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "snakeHeadRight2.jpg");
 
         //this.doraemon = new Rectangle(grid.columnToX(15), grid.rowToY(15),grid.getCellsize(),grid.getCellsize());
-        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "doraemonRight.png");
+        this.doraemon = new Picture(grid.columnToX(15), grid.rowToY(15), "doraemonRightFinal.png");
         //this.doraemon = new Picture(50,50, "BwPMAyDK_400x400.jpg");
-      this.pos = pos;
+        this.pos = pos;
         keyboard = new Keyboard(this);
         this.currentDirection = GridDirection.DEFAULT;
 
@@ -47,6 +47,14 @@ public class Doraemon implements KeyboardHandler {
         return doraemon.getY();
     }
 
+
+    public int lastX() {
+        return pos.getLastX();
+    }
+
+    public int lastY() {
+        return pos.getLastY();
+    }
 
     /**
      * Initialize keyboard handlers
@@ -176,18 +184,18 @@ public class Doraemon implements KeyboardHandler {
                 }
                 currentDirection = GridDirection.LEFT;
 
-                doraemon.load("comeresquerda.png");
+                //doraemon.load("comeresquerda.png");
 
-                //doraemon.load("doraemonLeft.png");
+                doraemon.load("doraemonLeftFinal.png");
             break;
             case KeyboardEvent.KEY_D:
                 if (currentDirection == GridDirection.LEFT) {
                     break;
                 }
                 currentDirection = GridDirection.RIGHT;
-                doraemon.load("comerdireita.png");
+                //doraemon.load("comerdireita.png");
 
-                //doraemon.load("doraemonRight.png");
+                doraemon.load("doraemonRightFinal.png");
                break;
             case KeyboardEvent.KEY_W:
                 if (currentDirection == GridDirection.DOWN) {
@@ -195,7 +203,7 @@ public class Doraemon implements KeyboardHandler {
                 }
                 currentDirection = GridDirection.UP;
                 //       doraemon.load("snakeHeadUp2.jpg");
-                doraemon.load("doraemonDown.png");
+                doraemon.load("doraemonUpFinal2.png");
                break;
             case KeyboardEvent.KEY_S:
                 if (currentDirection == GridDirection.UP) {

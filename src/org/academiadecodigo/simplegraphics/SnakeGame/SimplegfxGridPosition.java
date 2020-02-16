@@ -12,6 +12,8 @@ public class SimplegfxGridPosition implements GridPosition {
     private SimplegfxGrid simpleGfxGrid;
     private Rectangle rectangle;
     private Picture doraemon;
+    private int lastX;
+    private int lastY;
 
     /*public SimplegfxGridPosition(SimplegfxGrid grid) {
         this.simpleGfxGrid = grid;
@@ -27,6 +29,13 @@ public class SimplegfxGridPosition implements GridPosition {
 
     }
 
+    public int getLastX() {
+        return lastX;
+    }
+
+    public int getLastY() {
+        return lastY;
+    }
 
     public Grid getGrid() {
         return grid;
@@ -68,6 +77,9 @@ public class SimplegfxGridPosition implements GridPosition {
     {
         int x = simpleGfxGrid.columnToX(getCol());
         int y = simpleGfxGrid.rowToY(getRow());
+        lastX = x;
+        lastY = y;
+
 
         switch (direction) {
                 case UP:
@@ -83,6 +95,7 @@ public class SimplegfxGridPosition implements GridPosition {
                     moveRight();
                     break;
             }
+
 
         int x2 = simpleGfxGrid.columnToX(getCol());
         int y2 = simpleGfxGrid.rowToY(getRow());
